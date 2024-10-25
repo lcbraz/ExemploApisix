@@ -47,18 +47,6 @@ services:
     networks:
       apisix:
   
-  keycloak:
-    image: "keycloak/keycloak:${KEYCLOAK_VERSION:-25.0.5}"
-    restart: always
-    command: start-dev
-    environment:
-      KEYCLOAK_ADMIN: "admin" 
-      KEYCLOAK_ADMIN_PASSWORD: "admin"
-    ports:
-      - "8080:8080/tcp"
-    networks:
-      apisix:
-
   etcd:
     image: bitnami/etcd:3.5.11
     restart: always
@@ -71,6 +59,18 @@ services:
       ETCD_LISTEN_CLIENT_URLS: "http://0.0.0.0:2379"
     ports:
       - "2379:2379/tcp"
+    networks:
+      apisix:
+
+  keycloak:
+    image: "keycloak/keycloak:${KEYCLOAK_VERSION:-25.0.5}"
+    restart: always
+    command: start-dev
+    environment:
+      KEYCLOAK_ADMIN: "admin" 
+      KEYCLOAK_ADMIN_PASSWORD: "admin"
+    ports:
+      - "8080:8080/tcp"
     networks:
       apisix:
 
