@@ -47,8 +47,8 @@ services:
     networks:
       apisix:
   
-  keycloack:
-    image: "keycloak/keycloak:${KEYCLOACK_VERSION:-25.0.5}"
+  keycloak:
+    image: "keycloak/keycloak:${KEYCLOAK_VERSION:-25.0.5}"
     restart: always
     command: start-dev
     environment:
