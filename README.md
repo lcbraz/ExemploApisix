@@ -45,13 +45,13 @@ sudo docker run hello-world
 
 Clone de repositório:
 
-```
+```sh
 git clone https://github.com/lcbraz/ExemploApisix.git
 ```
 
 Subir containers:
 
-```
+```sh
 # Ativar
 sudo docker compose -p docker-apisix up -d
 
@@ -72,21 +72,9 @@ Testar:
 curl -i -H "X-API-KEY: $X_API_KEY" http://myweb.com:9180/apisix/admin/routes
 ```
 
-Retorno:
+Retorno **200 OK**:
 
-```
-HTTP/1.1 200 OK
-Date: Fri, 25 Oct 2024 13:48:37 GMT
-Content-Type: application/json
-Transfer-Encoding: chunked
-Connection: keep-alive
-Server: APISIX/3.10.0
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Credentials: true
-Access-Control-Expose-Headers: *
-Access-Control-Max-Age: 3600
-X-API-VERSION: v3
-
+```json
 {"total":0,"list":[]}
 ```
 
@@ -148,7 +136,7 @@ export OIDC_CLIENT_SECRET=Cw4c93hzF5hwHyfqEcryxhLeSXpRzFYA  # substituir pelo se
 
 Rota para obtenção do token:
 
-```bash
+```sh
 curl -i -H "X-API-KEY: $X_API_KEY" -X PUT http://myweb.com:9180/apisix/admin/routes -d '
 {
   "id": "api-token-route",
@@ -170,23 +158,9 @@ curl -i -H "X-API-KEY: $X_API_KEY" -X PUT http://myweb.com:9180/apisix/admin/rou
 ```
 
 
-Retorno:
+Retorno **201 Created**:
 
-
-```bash
-HTTP/1.1 201 Created
-Date: Fri, 25 Oct 2024 13:57:16 GMT
-Content-Type: application/json
-Transfer-Encoding: chunked
-Connection: keep-alive
-Server: APISIX/3.10.0
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Credentials: true
-Access-Control-Expose-Headers: *
-Access-Control-Max-Age: 3600
-X-API-VERSION: v3
-
-
+```json
 {
   "key": "/apisix/routes/api-token-route",
   "value": {
@@ -245,24 +219,65 @@ curl -i -H "X-API-KEY: $X_API_KEY" -X PUT http://myweb.com:9180/apisix/admin/rou
     }                                                                                                                                          }                                                                                                                                          }'
 ```
 
-Retorno:
+Retorno **201 Created**:
 
-```
-HTTP/1.1 201 Created
-Date: Fri, 25 Oct 2024 14:43:22 GMT
-Content-Type: application/json
-Transfer-Encoding: chunked
-Connection: keep-alive
-Server: APISIX/3.10.0
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Credentials: true
-Access-Control-Expose-Headers: *
-Access-Control-Max-Age: 3600
-X-API-VERSION: v3
-
-{"key":"/apisix/routes/auth-oidc-route","value":{"status":1,"id":"auth-oidc-route","update_time":1729867402,"create_time":1729867402,"uri":"/myservice/*","priority":0,"plugins":{"openid-connect":{"set_userinfo_header":true,"introspection_endpoint_auth_method":"client_secret_basic","revoke_tokens_on_logout":false,"set_refresh_token_header":false,"bearer_only":true,"client_id":"apisix-quickstart-client","client_secret":"PuqPwr8JwnCgW2kOzg8bDq9fdtMgxZMdcKZJQbaxVAaB525wOogiMTiWGOSMrsLC","realm":"apisix","ssl_verify":false,"redirect_uri":"http://myweb.com:9080/myservice/callback","jwt_verification_cache_ignore":false,"use_nonce":false,"timeout":3,"unauth_action":"auth","token_endpoint_auth_method":"client_secret_basic","client_jwt_assertion_expires_in":60,"introspection_interval":0,"renew_access_token_on_expiry":true,"logout_path":"/logout","iat_slack":120,"use_pkce":false,"discovery":"http://keycloak:8080/realms/quickstart-realm/.well-known/openid-configuration","set_access_token_header":true,"scope":"openid profile","accept_none_alg":false,"access_token_in_authorization_header":false,"accept_unsupported_alg":true,"jwk_expires_in":86400,"set_id_token_header":true,"force_reauthorize":false,"access_token_expires_leeway":0}},"upstream":{"scheme":"http","hash_on":"vars","type":"roundrobin","nodes":{"web2:80":2,"web1:80":1},"pass_host":"pass"}}}
-
-
+```json
+{
+  "key": "/apisix/routes/auth-oidc-route",
+  "value": {
+    "status": 1,
+    "id": "auth-oidc-route",
+    "update_time": 1729867402,
+    "create_time": 1729867402,
+    "uri": "/myservice/*",
+    "priority": 0,
+    "plugins": {
+      "openid-connect": {
+        "set_userinfo_header": true,
+        "introspection_endpoint_auth_method": "client_secret_basic",
+        "revoke_tokens_on_logout": false,
+        "set_refresh_token_header": false,
+        "bearer_only": true,
+        "client_id": "apisix-quickstart-client",
+        "client_secret": "PuqPwr8JwnCgW2kOzg8bDq9fdtMgxZMdcKZJQbaxVAaB525wOogiMTiWGOSMrsLC",
+        "realm": "apisix",
+        "ssl_verify": false,
+        "redirect_uri": "http://myweb.com:9080/myservice/callback",
+        "jwt_verification_cache_ignore": false,
+        "use_nonce": false,
+        "timeout": 3,
+        "unauth_action": "auth",
+        "token_endpoint_auth_method": "client_secret_basic",
+        "client_jwt_assertion_expires_in": 60,
+        "introspection_interval": 0,
+        "renew_access_token_on_expiry": true,
+        "logout_path": "/logout",
+        "iat_slack": 120,
+        "use_pkce": false,
+        "discovery": "http://keycloak:8080/realms/quickstart-realm/.well-known/openid-configuration",
+        "set_access_token_header": true,
+        "scope": "openid profile",
+        "accept_none_alg": false,
+        "access_token_in_authorization_header": false,
+        "accept_unsupported_alg": true,
+        "jwk_expires_in": 86400,
+        "set_id_token_header": true,
+        "force_reauthorize": false,
+        "access_token_expires_leeway": 0
+      }
+    },
+    "upstream": {
+      "scheme": "http",
+      "hash_on": "vars",
+      "type": "roundrobin",
+      "nodes": {
+        "web2:80": 2,
+        "web1:80": 1
+      },
+      "pass_host": "pass"
+    }
+  }
+}
 ```
 
 
@@ -271,29 +286,15 @@ Obtenção o token:
 
 ```sh
 curl -i http://myweb.com:9080/myservice/api/token \
-    --data-urlencode 'grant_type=client_credentials' \
-    --data-urlencode 'client_id=apisix-quickstart-client' \
-    --data-urlencode 'client_secret=GYHf9y8XKfrNMeYHSdVCzOsScWdK0dDc'
+    --data-urlencode "grant_type=client_credentials" \
+    --data-urlencode "client_id=apisix-quickstart-client" \
+    --data-urlencode "client_secret=$OIDC_CLIENT_SECRET"
 ```
 
-Retorno:
+Retorno **200 OK**:
 
 
-```
-HTTP/1.1 200 OK
-Content-Type: application/json
-Content-Length: 1450
-Connection: keep-alive
-Cache-Control: no-store
-Pragma: no-cache
-Referrer-Policy: no-referrer
-Strict-Transport-Security: max-age=31536000; includeSubDomains
-X-Content-Type-Options: nosniff
-X-Frame-Options: SAMEORIGIN
-X-XSS-Protection: 1; mode=block
-Server: APISIX/3.10.0
-
-
+```json
 {
   "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJWd2huWW55QVltMkNON1otY1RObGdEdFFnNy0wTUpkWDQ3cEdGQlhhbDJvIn0.eyJleHAiOjE3Mjk4NjY1OTMsImlhdCI6MTcyOTg2NjI5MywianRpIjoiMDZhZGZiZmMtMTI5MC00YTg0LWExYmYtNWE0YWU0NzRmNWE0IiwiaXNzIjoiaHR0cDovL2tleWNsb2FrOjgwODAvcmVhbG1zL3F1aWNrc3RhcnQtcmVhbG0iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiMzYyNDZkMjgtZWU2NC00MzZmLTllYmItOGViODlmOGVmZGMzIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYXBpc2l4LXF1aWNrc3RhcnQtY2xpZW50IiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLXF1aWNrc3RhcnQtcmVhbG0iLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJjbGllbnRIb3N0IjoiMTcyLjE4LjAuOCIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1hcGlzaXgtcXVpY2tzdGFydC1jbGllbnQiLCJjbGllbnRBZGRyZXNzIjoiMTcyLjE4LjAuOCIsImNsaWVudF9pZCI6ImFwaXNpeC1xdWlja3N0YXJ0LWNsaWVudCJ9.JYhA8tLQRjmvCcOfpIxgXgLQMw2Nxc4E12L8gsiY4jgfshNSAnEgSjvNSjtgTDiD8ZolRHTU5HN0yOREW-nT8SiXJ6rSb26H8Jr902qMj_tNY4bukkkAXQL8vydxNT-PAauq_jQzxVf6T3ErG-mGwebaZlvXtysg0mE4BOKVI2C0gyCInRt-1HvEwIWuPOnKbtgjs_FW8-TgmiOJzlGHBzsYh-wkfq8TNJJl9E0I_lnkv4TwgetgTS2o6u4g8wd41zOWgsHs22SyWGF1zMQu15N9J-9Uw-NdUxCkzitzxmS7tHfp_lqOBEHSXmJ_L8-994frh2zHExvQyySPlzEBYg",
   "expires_in": 300,
@@ -310,10 +311,10 @@ Para facilitar os testes salvar o token direto para uma variável do shell:
 
 
 ```sh
-token=$(curl -s http://myweb.com:9080/myservice/api/token --data-urlencode \
-    'grant_type=client_credentials' \
-    --data-urlencode 'client_id=apisix-quickstart-client' \
-    --data-urlencode 'client_secret=GYHf9y8XKfrNMeYHSdVCzOsScWdK0dDc' | jq -r .access_token)
+token=$(curl -s http://myweb.com:9080/myservice/api/token \
+    --data-urlencode "grant_type=client_credentials" \
+    --data-urlencode "client_id=apisix-quickstart-client" \
+    --data-urlencode "client_secret=$OIDC_CLIENT_SECRET" | jq -r .access_token)
 ```
 
 
@@ -335,17 +336,9 @@ Requisição sem autenticação:
 curl -i http://myweb.com:9080/myservice/api/hello
 ```
 
-Retorno:
+Retorno **401 Unauthorized**:
 
-```
-HTTP/1.1 401 Unauthorized
-Date: Fri, 25 Oct 2024 15:07:16 GMT
-Content-Type: text/html; charset=utf-8
-Content-Length: 251
-Connection: keep-alive
-WWW-Authenticate: Bearer realm="apisix"
-Server: APISIX/3.10.0
-
+```json
 <html>
 <head><title>401 Authorization Required</title></head>
 <body>
@@ -364,21 +357,9 @@ Apagar rota de autenticação simples:
 curl -i -H "X-API-KEY: $X_API_KEY" -X DELETE http://myweb.com:9180/apisix/admin/routes/auth-oidc-route
 ```
 
-Retono:
+Retono **200 OK**:
 
-```
-HTTP/1.1 200 OK
-Date: Fri, 25 Oct 2024 15:12:17 GMT
-Content-Type: application/json
-Transfer-Encoding: chunked
-Connection: keep-alive
-Server: APISIX/3.10.0
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Credentials: true
-Access-Control-Expose-Headers: *
-Access-Control-Max-Age: 3600
-X-API-VERSION: v3
-
+```sh
 {"deleted":"1","key":"/apisix/routes/auth-oidc-route"}
 ```
 
@@ -413,23 +394,10 @@ curl -i -H "X-API-KEY: $X_API_KEY" -X PUT http://myweb.com:9180/apisix/admin/rou
 }'
 ```
 
-Retorno:
+Retorno **201 Created**:
 
 
-```
-HTTP/1.1 201 Created
-Date: Fri, 25 Oct 2024 14:16:28 GMT
-Content-Type: application/json
-Transfer-Encoding: chunked
-Connection: keep-alive
-Server: APISIX/3.10.0
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Credentials: true
-Access-Control-Expose-Headers: *
-Access-Control-Max-Age: 3600
-X-API-VERSION: v3
-
-
+```json
 {
   "key": "/apisix/routes/authz-keycloak-route",
   "value": {
@@ -531,16 +499,9 @@ Requisição autenticada na URL não permitida:
 curl -i http://myweb.com:9080/myservice/api/ -H "Authorization: Bearer $token"
 ```
 
-Retorno:
+Retorno **403 Forbidden**:
 
-```sh
-HTTP/1.1 403 Forbidden
-Date: Fri, 25 Oct 2024 16:09:26 GMT
-Content-Type: text/plain; charset=utf-8
-Transfer-Encoding: chunked
-Connection: keep-alive
-Server: APISIX/3.10.0
-
+```json
 {"error":"access_denied","error_description":"not_authorized"}⏎
 ```
 
