@@ -90,7 +90,7 @@ Apisix portas:
 
 ### Criar Realm
 
-Criar *realm*: **quickstart-realm**.
+Criar *realm*: **quickstart-realm**
 
 ![Criar Realm](imgs/realm01.png "Criar Realm")
 
@@ -99,7 +99,7 @@ Criar *realm*: **quickstart-realm**.
 
 ### Criar Client
 
-Criar *client*: **apisix-quickstart-client**.
+Criar *client*: **apisix-quickstart-client**
 
 ![Client settings](imgs/client01.png)
 
