@@ -148,7 +148,7 @@ export OIDC_CLIENT_SECRET=Cw4c93hzF5hwHyfqEcryxhLeSXpRzFYA  # substituir pelo se
 
 Rota para obtenção do token:
 
-```json
+```bash
 curl -i -H "X-API-KEY: $X_API_KEY" -X PUT http://myweb.com:9180/apisix/admin/routes -d '
 {
   "id": "api-token-route",
@@ -172,7 +172,8 @@ curl -i -H "X-API-KEY: $X_API_KEY" -X PUT http://myweb.com:9180/apisix/admin/rou
 
 Retorno:
 
-```json
+
+```bash
 HTTP/1.1 201 Created
 Date: Fri, 25 Oct 2024 13:57:16 GMT
 Content-Type: application/json
@@ -184,6 +185,7 @@ Access-Control-Allow-Credentials: true
 Access-Control-Expose-Headers: *
 Access-Control-Max-Age: 3600
 X-API-VERSION: v3
+
 
 {
   "key": "/apisix/routes/api-token-route",
