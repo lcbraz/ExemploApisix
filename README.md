@@ -92,8 +92,8 @@ X-API-VERSION: v3
 
 Apisix portas:
 
-- *TCP/9180*: porta de gerencia
-- *TCP/9080*: porta onde os serviços serão expostos (routes)
+- **TCP/9180**: porta de gerencia
+- **TCP/9080**: porta onde os serviços serão expostos (routes)
 
 
 
@@ -542,4 +542,10 @@ Server: APISIX/3.10.0
 {"error":"access_denied","error_description":"not_authorized"}⏎
 ```
 
+## Referências
 
+
+- https://docs.api7.ai/apisix/how-to-guide/authentication/set-up-sso-with-keycloak
+- https://docs.api7.ai/hub/openid-connect
+- https://docs.api7.ai/hub/authz-keycloak
+- https://www.keycloak.org/docs/latest/authorization_services/
