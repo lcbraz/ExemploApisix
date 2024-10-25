@@ -52,9 +52,20 @@ git clone https://github.com/lcbraz/ExemploApisix.git
 Subir containers:
 
 ```
+# Ativar
 sudo docker compose -p docker-apisix up -d
+
+# Desativar
+sudo docker compose -p docker-apisix down -v
 ```
 
+
+
 ## Configuração base do Keycloak
+
+
+### Criar Realm
+
+![Criar Realm](imgs/realm01.png "Criar Realm")
 
 
