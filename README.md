@@ -14,7 +14,7 @@
 IP da VM de teste: *192.168.56.156*. Ajuste conforme necessário.
 
 
-## Install docker
+## Instalar docker
 
 
 ```sh
@@ -23,7 +23,7 @@ for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker c
 
 # Add Docker's official GPG key:
 sudo apt-get -y update
-sudo apt-get -y install ca-certificates curl git
+sudo apt-get -y install ca-certificates curl git jq
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -90,12 +90,16 @@ Apisix portas:
 
 ### Criar Realm
 
+Criar *realm*: **quickstart-realm**.
+
 ![Criar Realm](imgs/realm01.png "Criar Realm")
 
 ![Realm quickstart](imgs/realm02.png "Quickstart Realm")
 
 
 ### Criar Client
+
+Criar *client*: **apisix-quickstart-client**.
 
 ![Client settings](imgs/client01.png)
 
@@ -115,7 +119,7 @@ Obter endpoint de configuração do OpenID:
 ![OpenID Endpoint Configuration](imgs/oidc01.png)
 
 
-Obber segredo do *client*:
+Obter segredo do *client*:
 
 
 ![Client Secret](imgs/oidc02.png)
@@ -216,7 +220,9 @@ curl -i -H "X-API-KEY: $X_API_KEY" -X PUT http://myweb.com:9180/apisix/admin/rou
     "nodes":{
       "web1:80":1,
       "web2:80":2
-    }                                                                                                                                          }                                                                                                                                          }'
+    }
+  }
+}'
 ```
 
 Retorno **201 Created**:
@@ -338,7 +344,7 @@ curl -i http://myweb.com:9080/myservice/api/hello
 
 Retorno **401 Unauthorized**:
 
-```json
+```html
 <html>
 <head><title>401 Authorization Required</title></head>
 <body>
@@ -348,7 +354,7 @@ Retorno **401 Unauthorized**:
 </html>
 ```
 
-### Autenficação OIDC com autorização (permissão granular)
+### Autenticação OIDC com autorização (permissão granular)
 
 
 Apagar rota de autenticação simples:
@@ -357,7 +363,7 @@ Apagar rota de autenticação simples:
 curl -i -H "X-API-KEY: $X_API_KEY" -X DELETE http://myweb.com:9180/apisix/admin/routes/auth-oidc-route
 ```
 
-Retono **200 OK**:
+Retorno **200 OK**:
 
 ```sh
 {"deleted":"1","key":"/apisix/routes/auth-oidc-route"}
