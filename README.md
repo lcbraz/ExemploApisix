@@ -287,7 +287,7 @@ Retorno **201 Created**:
 ```
 
 
-Obtenção o token:
+Obtendo o token:
 
 
 ```sh
